@@ -6,23 +6,23 @@ You must submit an information sheet with every assignment.  Also be sure
 to submit all materials following the procedures described on the
 submission procedures page.
 
-Name:  
+Name:  James Hahn
 
-Lecture section:  
+Lecture section:  11am-12:15pm Tu/Th
 
-Recitation day and time:  
+Recitation day and time:  10-10:50am Fr
 
-Assignment #:  
+Assignment #:  4
 
-Program due date:  
+Program due date:  April 4th, 2017
 
-Handed in date:  
+Handed in date:  April 4th, 2017
 
 Source code file name(s):
-
-
-
-
+NetworkAnalysis.java
+Graph.java
+Edge.java
+Vertex.java
 
 
 
@@ -34,7 +34,7 @@ Other file name(s) (if relevant):
 
 
 
-Does your program run without error?:
+Does your program run without error?: Yes
 
 If not, what is/are the error(s) and which parts of your program run
 correctly?:

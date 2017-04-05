@@ -23,7 +23,7 @@ Your program should operate entirely via a console interface menu (no GUI).
 	1. Find the __lowest latency path__ between any two points, and give the bandwidth available along that path.
 		1.  First, your program should prompt the user for the two vertices that they wish to find the lowest latency path between.
 		1.  Then, your program should output the edges that comprise this lowest latency path in order from the first user-specified vertex to the second.
-		1.  You must find the path between these vertices that will require the least amount of time for a single data packet to travel.  For this project, we will simply compute the time required to travel along a path through the graph as the sum of the times required to travel each edge, where the time to travel each edge is computed as the product of speed at which data can be send along a connection of that type and the length of the cable represented by that edge.
+		1.  You must find the path between these vertices that will require the least amount of time for a single data packet to travel.  For this project, we will simply compute the time required to travel along a path through the graph as the sum of the times required to travel each edge, where the time to travel each edge is computed as the quotient of speed at which data can be send along a connection of that type and the length of the cable represented by that edge.
 			* A single data packet can be sent along a copper cable at a speed of 230000000 meters per second.
 			* A single data packet can be sent along a fiber optic cable at a speed of 200000000 meters per second.
 		1.  Your program should also output the bandwidth that is available along the resulting path (minimum bandwidth of all edges in the path).
@@ -34,7 +34,7 @@ Your program should operate entirely via a console interface menu (no GUI).
 	1. Find the __lowest average latency spanning tree__ for the graph (i.e., a spanning tree with the lowest average latency per edge).
 	1. Determine whether or not the graph would remain connected if __any two vertices in the graph were to fail__.
 		1. Note that you are not prompting the users for two vertices that could fail, you will need to determine whether the failure of *any pair* of vertices would cause the graph to become disconnected.
-	1. Quit the program. 
+	1. Quit the program.
 
 ## Submission Guidelines:
 * **DO NOT SUBMIT** any IDE package files.
