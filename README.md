@@ -3,8 +3,8 @@ CS1501 (Algorithm Implementation) in Spring 2017 at the University of Pittsburgh
 
 This class was taking as a writing-intensive requirement, hence the four writing assignments in this repository.
 
-Project 1 - Exhaustive Search/Pruning of Passwords in a Dictionary
-    * Used a De La Brandais Trie (DLB) to implement a symbol
+* Project 1 - Exhaustive Search/Pruning of Passwords in a Dictionary
+    * Used a De La Briandais Trie (DLB) to implement a symbol
     * When the user feeds in a password, they will be informed if it's valid or invalid
         * If it's invalid, 10 alternative passwords that match it the closest will be provided
 Project 2 - LZW Compression
