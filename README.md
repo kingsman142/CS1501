@@ -23,3 +23,8 @@ This class was taking as a writing-intensive requirement, hence the four writing
 * Project 5 - RSA Encryption
     * Demonstrated RSA encryption for signing and verification of files
             * This uses public and private keys to ensure correct users are viewing/being sent information from verified users
+
+Paper 1 - Introducing MergeSort to the World in the 1970s
+Paper 2 - Describing LZW Compression to Colleagues
+Paper 3 - Advertising Boyer-Moore as Top Word Processor Algorithm in 1980s (Page 1 is an advertising pitch)
+Paper 4 - Revisions of Paper 1 ("Introducing MergeSort to the World in the 1970s")
