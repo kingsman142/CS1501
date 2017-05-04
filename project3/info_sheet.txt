@@ -1,0 +1,57 @@
+========================================
+CS/COE 1501 Assignment Information Sheet
+----------------------------------------
+
+You must submit an information sheet with every assignment.  Also be sure
+to submit all materials following the procedures described on the
+submission procedures page.
+
+Name:  James Hahn
+
+Lecture section:  Tu/Th 11am-12:15pm W
+
+Recitation day and time:  Fr 10-10:50am
+
+Assignment #:  3
+
+Program due date:  March 18, 2017
+
+Handed in date:  March 18, 2017
+
+Source code file name(s):
+Car.java
+CarNode.java
+CarPQ.java
+CarPQManager.java
+CarTracker.java
+PQNode.java
+PriorQueueDLB.java
+VINdlb.java
+
+Other file name(s) (if relevant):
+documentation.txt
+
+
+
+
+
+
+Does your program run without error?: Yes
+
+If not, what is/are the error(s) and which parts of your program run
+correctly?:
+
+
+
+
+
+
+
+Additional comments to the grader:
+
+
+
+
+
+
+

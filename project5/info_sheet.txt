@@ -1,0 +1,54 @@
+========================================
+CS/COE 1501 Assignment Information Sheet
+----------------------------------------
+
+You must submit an information sheet with every assignment.  Also be sure
+to submit all materials following the procedures described on the
+submission procedures page.
+
+Name:  James Hahn
+
+Lecture section:  11am-12:15pm Tu/Th
+
+Recitation day and time:  10-10:50am Fr
+
+Assignment #:  5
+
+Program due date:  April 21st, 2017
+
+Handed in date:  April 21st, 2017
+
+Source code file name(s):
+BigPrime.java
+RandomPrime.java
+RsaKeyGen.java
+RsaSign.java
+
+
+
+Other file name(s) (if relevant):
+HashEx.java (this file was given to us as an example of MessageDigest, so I used some of the base code from it)
+
+
+
+
+
+
+Does your program run without error?: Yes
+
+If not, what is/are the error(s) and which parts of your program run
+correctly?:
+
+
+
+
+
+
+
+Additional comments to the grader:
+My file signing may take like 5-10 seconds to complete on a 3.6Ghz quad-core processor, so just scale that accordingly to your machine.  I promise the program is working, I tested it countless times!
+
+
+
+
+

@@ -1,0 +1,172 @@
+James Hahn
+CS1501 Project 3
+
+There are a lot of details that went into my implementation, so this report is split into sections by files
+that contain implementations of key data structures required for this project.
+
+========== CarPQ.java =========
+This is a priority queue that cars can be inserted into. For its underlying data structure, it uses a min-heap
+that is created through an array.  This saves space because I can still represent a tree-like data structure
+required by a heap, but without the need to make nodes to store each car in the heap (like in a tree).  So,
+the root is at index 1, its left child is at index i*2, and its right child is at index (i*2)+1.  This is the
+same for any given index in the array:
+
+	At index 5:
+		left child is at index 10
+		right child is at index 11
+
+In addition, I created a Mode variable that determines whether this heap is storing min values by mileage ('m')
+or price ('p').  A final additional variable is MakeModelHeap; this was created to set whether this current
+CarPQ instance is storing all of the cars, or just the cars for a specific make and model.  Both of these
+variables were chosen for logistical purposed; they allowed me to put everything into one CarPQ.java file
+rather than a CarPQPrices.java and CarPQMileages.java file, as well as CarPQPricesMakeModel.java and 
+CarPQPricesAll.java files (these are just examples to show that management of all these different files
+would be pretty hectic if I didn't create these variables).  The addition of these variables does not impact
+the runtime of the program.  
+
+The heap is initialized to a size of 511, which turns out to be enough slots for 9 full levels of a full
+binary tree (level with 1 node, 2 nodes, 4 nodes, 8 nodes, 16 nodes, 32, 64, 128, and 256).  I chose this
+number because it's a simple number, fits along with a power of 2 because it's a binary tree and every node
+has 2 children, and it's a sufficiently large length to start the array at that doesn't make it a hassle.
+Initializing the heap to a length of 2048, for example, would be a pretty insane number, but initializing
+it with a size of 4 would be really small and require several resizes early on.  Lastly, for resizing the heap,
+it resizes when the heap is full and when it resizes, it doubles the length of the underlying array.  This 
+proves to be rather insignificant in terms of runtime unless the user is inserting a million items, which
+is when many large doubles are performed.  Right now, resize is O(n) because it requires n Car copies into
+the new array from the old array, where n is the number of items in the array.
+
+For insert into this priority queue, it is O(logN) because it acts similar to a binary tree, as mentioned
+above.  This is the standard insert function one will find with a heap, inserting the new Car object at the
+end of the heap (a new leaf in the "tree"), then it swims up to its appropriate location based on its property
+value.  
+
+When grabbing the priority queue's minimum value, it is O(1) because CarPQ.java simply returns the Car object
+at index 1.  
+
+For update, it is O(logN); the implementation is straightforward.  When a Car's price or mileage is updated,
+it may not be in the correct spot within the heap, so the program must swim the Car up, then sink it down, both
+requiring O(logN) operations.  So, the runtime is actually 2*O(logN), but multiplicative constants are removed,
+so it is O(logN).
+
+Now, for delete, the Car to be deleted is reference by its index in this current priority queue.  That index
+is moved, or rather swapped, with the Car object at the end of the heap (the car at the last leaf node),
+which is O(1) time.  Then, that car that was swapped into an arbitrary location of the heap might be in the
+wrong location, so it swims up, the sinks down, which is a 2*O(logN) runtime as mentioned above, which
+translates to just O(logN).  Finally, the car that is to be deleted is set to null, which is O(1).  Overall,
+this method is O(logN) + O(1) + O(1), or just O(logN).
+
+As for the remaining helper functions, they were obtained from the book:
+	greater() is O(1) because it's just a comparison
+	exch() is O(1) because it's just swapping two Car objects in the heap
+	setNewCarHeapIndex() is O(1) because it just sets a given Car's index in this current heap, allowing
+		for indirection within the heap
+	The runtimes for swim() and sink() were discussed above, both being O(logN), which is standard
+
+========== PriorQueueDLB.java ==========
+This is a special file that provides a unique implementation to this project.  So, basically, the user
+can enter an arbitrary number of cars with an arbitrary number of makes and models.  Because of this, I
+cannot create a fixed number of priority queues to deal with all of the possible make and model combinations.
+In order to solve this problem, I created a DLB that maps a make and model combination in the form of a string,
+make%model.  For example, if one was trying to find the priority queue stored in this DLB for a Ford Fiesta,
+they would traverse the DLB for Ford%Fiesta.  % was chosen as the separator between the two makes and models
+because a character had to be chosen to split them up, otherwise, if a separator character was not utilized,
+Ford Fiesta and For dFiesta would map to the same DLB when the two words are concatenated (FordFiesta and
+FordFiesta).  This does not impact the runtime of this class.  It works like a standard DLB, but instead
+of just storing words, it stores the necessary priority queue (CarPQ) object at the null terminating character
+of the make%model combination.
+
+So, to start off, insert is the length of the make%model string.  This is the standard for a DLB and won't
+cause any performance issues unless the length of the string ends up being 2000 characters long or something
+ridiculous.  The runtime for this function is O(k), where k is the length of the string mentioned above.
+
+As mentioned in the first paragraph of this section, PriorQueueDLB stores a priority queue at the end of the
+string, where the null terminating character node is placed.  So, for getPQ(), this is O(k), just like insert
+because we have to traverse through the make%model string and then grab the priority queue from the
+terminating node.
+
+Lastly, the exists function.  This, again, is O(k) where k is the length of the make%model string because
+we have to traverse through the string and check if the terminating node is in the DLB with the priority
+queue, showing that it indeed exists.
+
+========== CarPQManager.java ==========
+This file is used to manage all of the priority queues necessary to keep track of the cars in the program.  It
+contains a Prices priority queue which all of the Cars are added into and is a min-heap for prices and a
+Mileages priority queue which is a min-heap for all of the Cars.  Now, for MakeModelPrices and
+MakeModelMileages, these are special, they are of type PriorQueueDLB, which is a DLB that stores all of the
+priority queues for all of the make and model combinations present in the program.  The runtimes for
+PriorQueueDLB were discussed in the previous section of this report and the runtimes for CarPQ were discussed
+earlier as well.  This file is where all of the function calls from CarTracker.java will eventually go into,
+which will be dispersed out and the necessary operations will be performed on respective priority queues.
+
+Inserting into this manager requires the car to be inserted into the Prices priority queue that contains
+prices for all cars, Mileages priority queue for all cars, MakeModelPrices priority queue DLB (discussed
+above) for this car's specific make and model, as well as MakeModelMileages.  The runtimes for all of these
+classes have already been explained.  Inserting into CarPQ will be O(logN); this is performed 2 times total, 1
+time each for Prices and Mileages.  Finding the make/model priority queue for this car will be O(k), and then 
+inserting into that priority queue will be O(logN); both of these will be performed 2 times each because the
+program must insert into MakeModelPrices and MakeModelMileages.  Overall, the runtime is 4*O(logN) + 2*O(k),
+which is just O(logN) asymptotically.  This is an efficient operation.
+
+These 4 operations below have already been discussed:
+Getting the lowest price of all cars is O(1)
+Getting the lowest mileage of all cars is O(1)
+Getting the lowest price of a make/model is O(k) + O(1), which is O(k) asymptotically
+Getting the lowest mileage of a make/model is O(k) + O(1), which is O(k) asymptotically
+It is important to note the value of k is almost negligible because car makes and models do not tend to 
+be very long in terms of characters.  After some research, the car make/model with the highest number of
+characters in the world is the "Bentley Continental Flying Spur W12 Mulliner", which is 39 characters.  It is
+almost guaranteed the makes and models entered into this program will not even be close to that long, which
+means they'll probably be about 15 characters max, which actually turns out being constant in the practical,
+real-life world.
+
+Removing a car requires deleting the reference to a specific Car object from 4 different priority queues.
+First, since the heaps use indirection, are indexable, and each Car object stores its corresponding index
+for each of its 4 heaps, grabbing those indices are all O(1) time.  Then, the program must delete from the
+Prices, Mileages, and make/model prices and mileages priority queues.  Deleting from Prices and Mileages is
+O(logN) each, so 2*O(logN).  Grabbing the make/model priority queues is 2*O(k) and deleting from them is 
+2*O(logN).  Thus, the runtime for this is 4*O(logN) + 2*O(k).  O(k) is negligible, so asymptotically, the
+runtime is O(logN).  This operation is efficient.
+
+Updating a car is almost the same runtime as the above operations of remove and insert.  It takes in the 
+car which is updated, and a boolean that indicates whether it was the car's price or mileage that was updated.
+This improves the efficiency; instead of updating all 4 of the heaps, if the price is updated, the program
+only makes changes in the 2 prices heaps, and same for the case of the mileage being changed.  So, in short,
+regardless of whether price or mileage was updated, the runtime will be the same.  First, the main overarching
+priority queue is updated (Prices or Mileages), which is O(logN).  Then, the make/model priority queue is
+updated, which is O(logN) + O(k).  So, the overall runtime for updating is 2*O(logN) + O(k).  Since O(k) is 
+near constant, therefore negligible, and we desire the asymptotic runtimes, this operation is O(logN)
+asymptotically, thereofre it is efficient.
+
+========== VINdlb.java ==========
+This DLB has a very important reason, it acts as a symbol table for all of the cars.  The reason why it is 
+required is because when one updates a car, how are its properties supposed to be changed?  The program
+cannot simply iterate through a priority queue and find the car because that would require O(N) runtime,
+so it has to be able to be accessed in constant time.  With this DLB, it takes the 17-character VIN of a car,
+which a user enters, looks it up in the DLB, and can insert/grab the Car object at the terminating node.  It 
+performs just like any normal DLB.
+
+An insert will perform 17 traversals each time because all VINs are 17 characters long.  Because of this,
+the runtime is practically negligible and is O(1) asymptotically.  
+
+The exists function is the same; 17 traversals are performed to find the Car stored with that VIN.  Therefore,
+it is O(1) asymptotically.  The existsButNotSet function is identical to the exists function but just checks
+to make sure a Car is stored at that terminating node in the DLB, and it's not just a null Car.  It does not
+impact the performance of the program, but rather helps me think through adding and removing cars from the
+DLB.
+
+The getCar function will execute 17 traverals, same as the oeprations above, but this time it will just return
+the Car object located at the terminating node.  This is O(1) asymptotically.
+
+Finally, the remove operation.  The way I set up my DLB, since a user can, for example, create a car with VIN
+"0123456789ABCDEFG" and then delete that Car and create another Car with the same VIN, I just do the necessary
+traversals through the VIN string, locate the null terminating node, and set the Car reference to null; this
+basically treats that Car as not existing.  Then, when inserting later on, the program just needs to set that
+reference to an actual Car again.  Again, this function is O(1).
+
+========== Additional Implementation Notes ==========
+I used DLBs instead of R-way tries because the symbol tables used in this project will be sparse.  For example,
+with VINs, there are 36^17 possible VIN ids, which turns out to be about 286.5 septillion.  That would create
+the most dense DLB, which would very much warrant the use of an R-way trie rather than a DLB.  However, for
+the situation of this project, and this database, there are probably 1 billion cars in the world.  This doesn't
+even come close to the 286.5 septillion number from above.  Therefore, using a DLB will most likely end up
+saving space at pretty much no cost to time.
