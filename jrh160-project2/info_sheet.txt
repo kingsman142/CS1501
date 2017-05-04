@@ -1,0 +1,57 @@
+========================================
+CS/COE 1501 Assignment Information Sheet
+----------------------------------------
+
+You must submit an information sheet with every assignment.  Also be sure
+to submit all materials following the procedures described on the
+submission procedures page.
+
+Name:  James Hahn
+
+Lecture section:  Tu/Th 11:00am-12:15pm W
+
+Recitation day and time:  Fr 10:00-10:50am
+
+Assignment #:  2
+
+Program due date:  February 26th, 2017 11:59pm
+
+Handed in date:  February 26th, 2017
+
+Source code file name(s):
+LZW.java
+MyLZW.java
+BinaryStdIn.java
+BinaryStdOut.java
+Queue.java
+StdIn.java
+StdOut.java
+TST.java
+
+Other file name(s) (if relevant):
+results.txt
+
+
+
+
+
+
+Does your program run without error?: Yes
+
+If not, what is/are the error(s) and which parts of your program run
+correctly?:
+
+
+
+
+
+
+
+Additional comments to the grader:
+All of these programs were ran on a 64-bit machine with Windows 10 as the OS.  Keep this in mind when 
+checking file sizes, as OSX's file system uses 1000B = 1KB, whereas Windows uses 1024B = 1KB, causing a
+slight difference depending on the machine these are ran on.
+
+
+
+
