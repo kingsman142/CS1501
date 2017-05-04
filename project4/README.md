@@ -36,26 +36,5 @@ Your program should operate entirely via a console interface menu (no GUI).
 		1. Note that you are not prompting the users for two vertices that could fail, you will need to determine whether the failure of *any pair* of vertices would cause the graph to become disconnected.
 	1. Quit the program.
 
-## Submission Guidelines:
-* **DO NOT SUBMIT** any IDE package files.
-* You must name the primary driver for your program NetworkAnalysis.java.
-* You must be able to compile your program by running "javac NetworkAnalysis.java".
-* You must be able to run your program with "java NetworkAnalysis data_filename.txt" (e.g., "java NetworkAnalysis network_data1.txt").
-* You must fill out info_sheet.txt.
-* Be sure to remember to push the latest copy of your code back to your GitHub repository before the the assignment is due.  At the deadline, the repositories will automatically be copied for grading.  Whatever is present in your GitHub repository at that time will be considered your submission for this assignment.
-
 ## Additional Notes/Hints:
-* Though code for the algorithms used in the assignment has been provided by the authors of your text book, note that use of this code will require extensive adaptations to account for the needs of this project.
 * The assumed calculation of network latency used here is a drastic simplification for this project.  Interested students are encouraged to investigate a more detailed study of computer networks independently (recommended reading:  _Computer Networks: A Systems Approach_ by Peterson and Davie).
-
-## Grading Rubric
-* Menu interface is user-friendly:  5
-* Graph is properly read and represented:  5
-* Queries:
-	* Lowest latency path computation:  10
-		* Bandwidth correctly reported:  5
-	* Copper-only connectivity:  10
-	* Maximum data flow:  20
-	* Minimum average latency spanning tree:  15
-	* Surviving 2 vertex failures:  25
-* Assignment info sheet/submission:  5
