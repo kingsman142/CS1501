@@ -1,5 +1,7 @@
 #CS/COE 1501 Project 2
 
+Note: No files are present in example_files because they were .gitignore'd from the repository.  This program should be able to compress any file regardless.
+
 ##Goal:
 To understand the innerworkings and implementation of the LZW compression algorithm, and to gain a better understanding of the performance it offers.
 
